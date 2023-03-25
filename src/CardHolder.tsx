@@ -2,6 +2,7 @@ import { useState } from "react"
 import Card from "./Card"
 import { ICard } from "./Card";
 import cardData from "./cardData";
+import "./CardHolder.css"
 
 /**
  * 
