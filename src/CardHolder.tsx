@@ -21,9 +21,7 @@ function CardHolder() {
     }, [])
 
     function loadCards() {
-        console.log("selected list", selectedList)
         const cards = cardData.find(d => d.name === selectedList);
-        console.log("cards: ", cards);
         if (cards) setCards(cards.content);
         setShowCards(true);
     }
@@ -60,29 +58,31 @@ function CardHolder() {
     return (
         <div className="CardHolder-container">
             <h1>Flash Cards!</h1>
-            <select onChange={updateSelectedList} value={selectedList}>
-                {cardLists.map((l, i) => <option key={i} value={l}>{l}</option>)}
-            </select>
-            <button className="CardHolder-button" onClick={loadCards}>
-                Load Cards
-            </button>
+            <div>
+                <select className="CardHolder-input" onChange={updateSelectedList} value={selectedList}>
+                    {cardLists.map((l, i) => <option key={i} value={l}>{l}</option>)}
+                </select>
+                <button className="CardHolder-input" onClick={loadCards}>
+                    Load Cards
+                </button>
+            </div>
             {showCards && <Card card={cards[currCard]} showAnswer={showAnswer} toggleShowAnswer={toggleShowAnswer} />}
-            {showCards && <div className="CardHolder-buttons">
+            {showCards && <div>
                 <button
-                    className="CardHolder-button"
+                    className="CardHolder-input"
                     onClick={goToPrevCard}
                     disabled={currCard === 0}
                 >
                     Prev
                 </button>
                 <button
-                    className="CardHolder-button"
+                    className="CardHolder-input"
                     onClick={markCardOk}
                 >
                     Mark OK
                 </button>
                 <button
-                    className="CardHolder-button"
+                    className="CardHolder-input"
                     onClick={goToNextCard}
                     disabled={cards && currCard === cards?.length - 1}
                 >
