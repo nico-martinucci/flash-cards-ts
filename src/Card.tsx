@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Card.css"
 
 interface CardProps {
     card: ICard
@@ -22,8 +23,8 @@ function Card({ card }: CardProps) {
 
     return (
         <div className="Card-container" onClick={toggleShowAnswer}>
-            {!showAnswer && <p>{card.q}</p>}
-            {showAnswer && <p>{card.a}</p>}
+            {!showAnswer && <p className="Card-content">{card.q}</p>}
+            {showAnswer && <p className="Card-content">{card.a}</p>}
         </div>
     )
 }
