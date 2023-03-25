@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { SyntheticEvent, useEffect, useState } from "react"
 import Card from "./Card"
 import { ICard } from "./Card";
 import cardData from "./cardData";
@@ -12,9 +12,19 @@ function CardHolder() {
     const [currCard, setCurrCard] = useState<number>(0);
     const [showCards, setShowCards] = useState<boolean>(false);
     const [showAnswer, setShowAnswer] = useState<boolean>(false);
+    const [cardLists, setCardLists] = useState<string[]>([]);
+    const [selectedList, setSelectedList] = useState<string>(cardData[0].name);
+
+    useEffect(function loadCardLists() {
+        const cardListOptions = cardData.map(d => d.name);
+        setCardLists(cardListOptions);
+    }, [])
 
     function loadCards() {
-        setCards(cardData);
+        console.log("selected list", selectedList)
+        const cards = cardData.find(d => d.name === selectedList);
+        console.log("cards: ", cards);
+        if (cards) setCards(cards.content);
         setShowCards(true);
     }
 
@@ -43,9 +53,16 @@ function CardHolder() {
         setShowAnswer(!showAnswer);
     }
 
+    function updateSelectedList(event: React.ChangeEvent<HTMLSelectElement>) {
+        setSelectedList(event.target.value);
+    }
+
     return (
         <div className="CardHolder-container">
             <h1>Flash Cards!</h1>
+            <select onChange={updateSelectedList} value={selectedList}>
+                {cardLists.map((l, i) => <option key={i} value={l}>{l}</option>)}
+            </select>
             <button className="CardHolder-button" onClick={loadCards}>
                 Load Cards
             </button>
