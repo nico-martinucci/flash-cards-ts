@@ -4,7 +4,8 @@ interface CardProps {
     card: ICard
 }
 
-interface ICard {
+export interface ICard {
+    ok: boolean;
     q: string;
     a: string;
 }
@@ -28,4 +29,4 @@ function Card({ card }: CardProps) {
 }
 
 
-export default Card
+export default Card;
