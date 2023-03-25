@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Card.css"
 
 interface CardProps {
-    card: ICard
+    card: ICard;
+    showAnswer: boolean;
+    toggleShowAnswer: () => void;
 }
 
 export interface ICard {
@@ -14,12 +16,7 @@ export interface ICard {
 /**
  * 
  */
-function Card({ card }: CardProps) {
-    const [showAnswer, setShowAnswer] = useState<Boolean>(false);
-
-    function toggleShowAnswer() {
-        setShowAnswer(!showAnswer);
-    }
+function Card({ card, showAnswer, toggleShowAnswer }: CardProps) {
 
     return (
         <div className="Card-container" onClick={toggleShowAnswer}>

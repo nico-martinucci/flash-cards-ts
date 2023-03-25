@@ -11,6 +11,7 @@ function CardHolder() {
     const [cards, setCards] = useState<ICard[]>([]);
     const [currCard, setCurrCard] = useState<number>(0);
     const [showCards, setShowCards] = useState<boolean>(false);
+    const [showAnswer, setShowAnswer] = useState<boolean>(false);
 
     function loadCards() {
         setCards(cardData);
@@ -19,10 +20,12 @@ function CardHolder() {
 
     function goToPrevCard() {
         setCurrCard(curr => curr - 1);
+        setShowAnswer(false);
     }
 
     function goToNextCard() {
         setCurrCard(curr => curr + 1);
+        setShowAnswer(false);
     }
 
     function markCardOk() {
@@ -36,13 +39,17 @@ function CardHolder() {
         })
     }
 
+    function toggleShowAnswer() {
+        setShowAnswer(!showAnswer);
+    }
+
     return (
         <div className="CardHolder-container">
             <h1>Flash Cards!</h1>
             <button className="CardHolder-button" onClick={loadCards}>
                 Load Cards
             </button>
-            {showCards && <Card card={cards[currCard]} />}
+            {showCards && <Card card={cards[currCard]} showAnswer={showAnswer} toggleShowAnswer={toggleShowAnswer} />}
             {showCards && <div className="CardHolder-buttons">
                 <button
                     className="CardHolder-button"
