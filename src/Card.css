@@ -16,3 +16,18 @@
     text-align: center;
     font-size: 1.5rem;
 }
+
+.Card-content-OK {
+    text-align: center;
+    font-size: 1.5rem;
+    color: rgb(184, 184, 184);
+}
+
+.Card-OK {
+    position: absolute;
+    top: 0;
+    left: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: green;
+}

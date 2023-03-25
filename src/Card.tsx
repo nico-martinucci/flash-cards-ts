@@ -18,10 +18,13 @@ export interface ICard {
  */
 function Card({ card, showAnswer, toggleShowAnswer }: CardProps) {
 
+    const contentStyle = card.ok ? "Card-content-OK" : "Card-content"
+
     return (
         <div className="Card-container" onClick={toggleShowAnswer}>
-            {!showAnswer && <p className="Card-content">{card.q}</p>}
-            {showAnswer && <p className="Card-content">{card.a}</p>}
+            {card.ok && <p className="Card-OK">OK</p>}
+            {!showAnswer && <p className={contentStyle}>{card.q}</p>}
+            {showAnswer && <p className={contentStyle}>{card.a}</p>}
         </div>
     )
 }
