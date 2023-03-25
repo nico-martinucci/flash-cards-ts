@@ -21,7 +21,7 @@ function Card({ card, showAnswer, toggleShowAnswer }: CardProps) {
     const contentStyle = card.ok ? "Card-content-OK" : "Card-content"
 
     return (
-        <div className="Card-container" onClick={toggleShowAnswer}>
+        <div className="Card-container" onClick={toggleShowAnswer} data-testid="Card-container">
             {card.ok && <p className="Card-OK">OK</p>}
             {!showAnswer && <p className={contentStyle}>{card.q}</p>}
             {showAnswer && <p className={contentStyle}>{card.a}</p>}

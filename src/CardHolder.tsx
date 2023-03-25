@@ -1,27 +1,34 @@
-import { SyntheticEvent, useEffect, useState } from "react"
+import { FunctionComponent, SyntheticEvent, useEffect, useState } from "react"
 import Card from "./Card"
 import { ICard } from "./Card";
 import cardData from "./cardData";
 import "./CardHolder.css"
 
+interface CardHolderProps {
+    cardDataInput?: {
+        name: string,
+        content: ICard[]
+    }[]
+}
+
 /**
  * 
  */
-function CardHolder() {
+function CardHolder({ cardDataInput = cardData }: CardHolderProps) {
     const [cards, setCards] = useState<ICard[]>([]);
     const [currCard, setCurrCard] = useState<number>(0);
     const [showCards, setShowCards] = useState<boolean>(false);
     const [showAnswer, setShowAnswer] = useState<boolean>(false);
     const [cardLists, setCardLists] = useState<string[]>([]);
-    const [selectedList, setSelectedList] = useState<string>(cardData[0].name);
+    const [selectedList, setSelectedList] = useState<string>(cardDataInput[0].name);
 
     useEffect(function loadCardLists() {
-        const cardListOptions = cardData.map(d => d.name);
+        const cardListOptions = cardDataInput.map(d => d.name);
         setCardLists(cardListOptions);
     }, [])
 
     function loadCards() {
-        const cards = cardData.find(d => d.name === selectedList);
+        const cards = cardDataInput.find(d => d.name === selectedList);
         if (cards) setCards(cards.content);
         setShowCards(true);
     }
